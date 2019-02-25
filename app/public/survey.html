@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Friend Finder</title>
+  </head>
+  <body>
+    <div class ="container">
+
+        <h2>Survey Questions</h2>
+        <hr>
+
+        <h3><strong>About You: </strong></h3>
+        <h4>Name (required) </h4>
+        <input type="text" name="" id="name" class="form-control" required>
+
+        <h4>Link to Photo Image (required) </h4>
+        <input type="text" name="" id="photo" class="form-control" required>
+
+        <hr>
+
+        <h3><strong>Question 1</strong></h3>
+        <h4>What is your favorite color?</h4>
+        <select data-placeholder="" class="chosen-select" id="q1">
+            <option value=""></option>
+            <option value="1">Blue</option>
+            <option value="2">Yellow</option>
+            <option value="3">Green</option>
+            <option value="4">Other</option>
+        </select>
+
+        <h3><strong>Question 2</strong></h3>
+        <h4>Do you own a pet?</h4>
+        <select data-placeholder="" class="chosen-select" id="q2">
+            <option value=""></option>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+
+        <h3><strong>Question 3</strong></h3>
+        <h4>Do you like to travel?</h4>
+        <select data-placeholder="" class="chosen-select" id="q3">
+            <option value=""></option>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+
+        <h3><strong>Question 4</strong></h3>
+        <h4>What is your favorite sport?</h4>
+        <select data-placeholder="" class="chosen-select" id="q4">
+            <option value=""></option>
+            <option value="1">Soccer</option>
+            <option value="2">Football</option>
+            <option value="3">Basketball</option>
+            <option value="4">Other</option>
+        </select>
+
+        <h3><strong>Question 5</strong></h3>
+        <h4>What is your favorite movie genre?</h4>
+        <select data-placeholder="" class="chosen-select" id="q5">
+            <option value=""></option>
+            <option value="1">Action</option>
+            <option value="2">Romance</option>
+            <option value="3">Comedy</option>
+            <option value="4">Horror</option>
+        </select>
+
+        <h3><strong>Question 6</strong></h3>
+        <h4>Do you prefer cats or dogs?</h4>
+        <select data-placeholder="" class="chosen-select" id="q6">
+            <option value=""></option>
+            <option value="1">Cats</option>
+            <option value="2">Dogs</option>
+        </select>
+
+        <h3><strong>Question 7</strong></h3>
+        <h4>Drink coffee everyday?</h4>
+        <select data-placeholder="" class="chosen-select" id="q7">
+            <option value=""></option>
+            <option value="1">True</option>
+            <option value="2">False</option>
+        </select>
+
+        <h3><strong>Question 8</strong></h3>
+        <h4>Star Wars or Star Trek?</h4>
+        <select data-placeholder="" class="chosen-select" id="q8">
+            <option value=""></option>
+            <option value="1">May the Force be with you!</option>
+            <option value="2">Live Long and Prosper</option>
+        </select>
+
+        <h3><strong>Question 9</strong></h3>
+        <h4>What super power would you pick?</h4>
+        <select data-placeholder="" class="chosen-select" id="q9">
+            <option value=""></option>
+            <option value="1">Speed</option>
+            <option value="2">Strength</option>
+            <option value="3">Flight</option>
+            <option value="4">Teleport</option>
+        </select>
+
+        <h3><strong>Question 10</strong></h3>
+        <h4>Did this survey take to long?</h4>
+        <select data-placeholder="" class="chosen-select" id="q10">
+            <option value=""></option>
+            <option value="1">Yes</option>
+            <option value="2">Somewhat</option>
+            <option value="3">Not really</option>
+            <option value="4">Not at all</option>
+        </select>
+
+        <br>
+        <br>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>Submit</button>
+
+        <hr>
+    </div>
+
+    <div id="resultsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title"><strong>Best Match</strong></h2>
+                </div>
+                <div class="modal-body">
+                    <h2 id="matchName"></h2>
+                    <img id="matchImg" src="" alt="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $("#submit").on("click", function(){
+
+            function validateForm() {
+                var isValid = true;
+                $(".form-control").each(function(){
+                    if($(this).val() === ""){
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
+
+            if(validateForm()){
+
+                var userData = {
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
+                        $("#q100").val()
+                    ]
+                };
+
+                var currentURL = window.location.origin;
+
+                $.post(currentURL + "/api/friends", userData, function(data){
+
+                    $("#matchName").text(data.name);
+                    $("#matchImg").attr("src", data.photo);
+
+                    $("#resultsModal").modal("toggle");
+                });
+            }
+        })
+    
+    </script>
+
+  </body>
+</html>
